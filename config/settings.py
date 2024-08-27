@@ -194,11 +194,10 @@ CELERY_TASK_TIME_LIMIT = 15000
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
 CELERY_BEAT_SCHEDULE = {
-    'check_last_login': {
-        'task': 'course.tasks.check_last_login',
-        'schedule': timedelta(days=1),
-    },
-}
+    'send_message_tg': {
+        'task': 'habit.tasks.send_message_tg',
+        'schedule': timedelta(minutes=10), }
+    }
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 TELEGRAM_URL = os.getenv("TELEGRAM_URL")
