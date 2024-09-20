@@ -7,9 +7,7 @@ from celery import shared_task
 
 @shared_task
 def send_message_tg():
-
     current_time = datetime.datetime.now().strftime("%X")
-
     habits = Habit.objects.all()
 
     for habit in habits:

@@ -4,9 +4,7 @@ from habit.models import Habit
 
 
 def message_create(habit_id):
-
     habit = Habit.objects.get(id=habit_id)
-
     user = habit.creator
     name = name_of_user(user.email)
 

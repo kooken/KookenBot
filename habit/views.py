@@ -29,7 +29,6 @@ class HabitIsPublishedListApiView(ListAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-
         user = self.request.user
         if user.is_authenticated:
             return Habit.objects.filter(is_published=True)

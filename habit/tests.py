@@ -9,7 +9,6 @@ from users.models import User
 class HabitTestCase(APITestCase):
 
     def setUp(self):
-
         self.user = User.objects.create(
             email="test@test.com",
             password="testpassword"
@@ -23,7 +22,6 @@ class HabitTestCase(APITestCase):
         )
 
     def test_create_habit(self):
-
         url = reverse("habit:habit_create")
         data = {
             "creator": self.user.pk,
@@ -42,12 +40,10 @@ class HabitTestCase(APITestCase):
         self.assertEqual(data.get("action"), "Go shopping")
 
     def test_list_habit(self):
-
         response = self.client.get(reverse('habit:habit_list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_update_habit(self):
-
         url = reverse("habit:habit_update", args=(self.habit.pk,))
         data = {
             "creator": self.user.pk,
@@ -64,9 +60,7 @@ class HabitTestCase(APITestCase):
         self.assertEqual(data.get("time"), "19:00:00")
         self.assertEqual(data.get("action"), "Training")
 
-
     def test_delete_habit(self):
-
         url = reverse("habit:habit_delete", args=(self.habit.pk,))
         response = self.client.delete(url)
 

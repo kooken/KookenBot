@@ -4,7 +4,6 @@ from config.settings import AUTH_USER_MODEL
 
 
 class Habit(models.Model):
-
     creator = models.ForeignKey(
         AUTH_USER_MODEL,
         on_delete=models.CASCADE,

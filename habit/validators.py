@@ -11,20 +11,19 @@ class NotCombinationValidator:
     def __call__(self, habit):
         if habit.get("connection_habit") and habit.get("reward"):
             raise ValidationError(
-                "Нельзя одновременно выбирать связанную привычку и вознаграждение"
+                "You can't choose a habit and a reward at the same time"
             )
 
 
 class TimeDurationValidator:
-
     duration_time = timedelta(seconds=120)
 
     def __init__(self, field_1):
         self.field_1 = field_1
 
     def __call__(self, habit):
-        if habit.get("duration") and habit.get("duration") > 120:  # self.duration_time:
-            raise ValidationError("Действие выполняется не более 2-х минут")
+        if habit.get("duration") and habit.get("duration") > 120:
+            raise ValidationError("Duration is more than 2 minutes!")
 
 
 class CombinationValidator:
@@ -36,7 +35,7 @@ class CombinationValidator:
     def __call__(self, habit):
         if habit.get("connection_habit"):
             if not habit.get("habit_is_pleasant"):
-                raise ValidationError("Связанные привычки могут быть только приятными")
+                raise ValidationError("Connected habits can be only pleasant")
 
 
 class AbsenceValidator:
@@ -50,7 +49,7 @@ class AbsenceValidator:
         if habit.get("habit_is_pleasant"):
             if habit.get("connection_habit") or habit.get("reward"):
                 raise ValidationError(
-                    "У приятной привычки не может быть связанной привычки или вознаграждения"
+                    "Pleasant habit can't have a connected habit or a reward"
                 )
 
 
@@ -65,4 +64,4 @@ class FrequencyValidator:
         try:
             num in number_list
         except ValidationError:
-            print("Привычку нельзя выполнять реже 1 и чаще 7 раз в неделю")
+            print("Habit can't be done less than 1 time and more than 7 times a week")
